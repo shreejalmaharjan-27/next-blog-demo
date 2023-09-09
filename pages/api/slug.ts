@@ -8,5 +8,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (!post) {
     return res.status(404).json({ message: "Not Found" });
   }
-  res.status(200).json(post);
+  const parsePostCategories = post.categories.map((category) => {
+    return postsData.categories.find((c) => c.id === category);
+  });
+
+  res.status(200).json({ post: post, categories: parsePostCategories });
 }
