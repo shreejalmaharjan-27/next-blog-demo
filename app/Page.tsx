@@ -5,7 +5,7 @@ import { Category, Post } from "@/types";
 
 export default function Page() {
   const [blogs, setBlogs] = useState<Post[]>([]);
-  const [currentPage, setCurrentPage] = useState(0);
+  const [CurrentPage, SetCurrentPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
   const [category, setCategory] = useState("");
   const [categories, setCategories] = useState<Category[]>([]);
@@ -34,7 +34,7 @@ export default function Page() {
     const posts = data.posts;
     setTotalItems(posts.length || 0);
     setBlogs(
-      posts.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage)
+      posts.slice(CurrentPage * itemsPerPage, (CurrentPage + 1) * itemsPerPage)
     );
     const initialImages = posts.reduce(
       (acc: { [key: number]: string }, blog) => {
@@ -49,7 +49,7 @@ export default function Page() {
 
   useEffect(() => {
     fetchBlogs();
-  }, [searchTerm, currentPage, category, itemsPerPage]);
+  }, [searchTerm, CurrentPage, category, itemsPerPage]);
 
   const handleImageError = (blogId: number) => {
     setBlogImages((prev) => ({
@@ -107,22 +107,22 @@ export default function Page() {
       {totalPages != 0 && (
         <div className="flex justify-between items-center">
           <button
-            disabled={currentPage === 0}
+            disabled={CurrentPage === 0}
             className="p-4 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300 disabled:bg-blue-500 disabled:cursor-not-allowed"
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
+            onClick={() => SetCurrentPage((prev) => Math.max(prev - 1, 0))}
           >
             Prev
           </button>
 
           <span className="text-xl font-semibold">
-            Page {currentPage + 1} of {totalPages}
+            Page {CurrentPage + 1} of {totalPages}
           </span>
           <div className="inline-flex space-x-4">
             <select
               value={itemsPerPage}
               onChange={(e) => {
                 setItemsPerPage(Number(e.target.value));
-                setCurrentPage(0);
+                SetCurrentPage(0);
               }}
               className="block w-full p-4 rounded-md shadow-sm bg-white"
             >
@@ -133,9 +133,9 @@ export default function Page() {
             </select>
 
             <button
-              disabled={currentPage >= Math.ceil(totalItems / itemsPerPage) - 1}
+              disabled={CurrentPage >= Math.ceil(totalItems / itemsPerPage) - 1}
               className="p-4 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300 disabled:bg-blue-500 disabled:cursor-not-allowed"
-              onClick={() => setCurrentPage((prev) => prev + 1)}
+              onClick={() => SetCurrentPage((prev) => prev + 1)}
             >
               Next
             </button>

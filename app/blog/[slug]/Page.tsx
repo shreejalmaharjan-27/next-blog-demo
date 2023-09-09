@@ -5,7 +5,7 @@ import { Category as ICategory, Post } from "@/types";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function page({ params }: { params: { slug: string } }) {
+export default function Page({ params }: { params: { slug: string } }) {
   const [post, setPost] = useState<Post | null>(null);
   const [categories, setCategories] = useState<ICategory[]>([]);
   const [error, setError] = useState(false);
