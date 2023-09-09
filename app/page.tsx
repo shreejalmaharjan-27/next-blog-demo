@@ -12,42 +12,44 @@ export default function Page() {
   const [blogImages, setBlogImages] = useState(
     {} as {
       [key: number]: string;
-    }
+    },
   );
   const [totalItems, setTotalItems] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-  const fetchBlogs = async () => {
-    let endpoint = "/api/posts";
-
-    if (searchTerm) {
-      endpoint = `/api/search?term=${searchTerm}`;
-    } else if (category) {
-      endpoint = `/api/filter?category=${category}`;
-    }
-
-    const response = await fetch(endpoint);
-    const data: { posts: Post[]; categories: Category[] } =
-      await response.json();
-
-    const posts = data.posts;
-    setTotalItems(posts.length || 0);
-    setBlogs(
-      posts.slice(CurrentPage * itemsPerPage, (CurrentPage + 1) * itemsPerPage)
-    );
-    const initialImages = posts.reduce(
-      (acc: { [key: number]: string }, blog) => {
-        acc[blog.id] = blog.imageUrl;
-        return acc;
-      },
-      {}
-    );
-    setBlogImages(initialImages);
-    setCategories(data.categories);
-  };
-
   useEffect(() => {
+    const fetchBlogs = async () => {
+      let endpoint = "/api/posts";
+
+      if (searchTerm) {
+        endpoint = `/api/search?term=${searchTerm}`;
+      } else if (category) {
+        endpoint = `/api/filter?category=${category}`;
+      }
+
+      const response = await fetch(endpoint);
+      const data: { posts: Post[]; categories: Category[] } =
+        await response.json();
+
+      const posts = data.posts;
+      setTotalItems(posts.length || 0);
+      setBlogs(
+        posts.slice(
+          CurrentPage * itemsPerPage,
+          (CurrentPage + 1) * itemsPerPage,
+        ),
+      );
+      const initialImages = posts.reduce(
+        (acc: { [key: number]: string }, blog) => {
+          acc[blog.id] = blog.imageUrl;
+          return acc;
+        },
+        {},
+      );
+      setBlogImages(initialImages);
+      setCategories(data.categories);
+    };
     fetchBlogs();
   }, [searchTerm, CurrentPage, category, itemsPerPage]);
 

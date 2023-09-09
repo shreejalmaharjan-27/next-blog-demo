@@ -7,7 +7,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   }
   if (typeof term === "string") {
     const filteredPosts = postsData.posts.filter((post) =>
-      post.title.toLowerCase().includes(term.toLowerCase())
+      post.title.toLowerCase().includes(term.toLowerCase()),
     );
     res
       .status(200)

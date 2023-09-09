@@ -10,7 +10,7 @@ export default function hander(req: NextApiRequest, res: NextApiResponse) {
 
   if (typeof category === "string") {
     const filteredPosts = postsData.posts.filter((post) =>
-      post.categories.includes(parseInt(category, 10))
+      post.categories.includes(parseInt(category, 10)),
     );
     res
       .status(200)

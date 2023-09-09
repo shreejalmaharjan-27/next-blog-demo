@@ -16,19 +16,20 @@ export default function Page({ params }: { params: { slug: string } }) {
     router.back();
   };
 
-  const fetchPost = async () => {
-    const response = await fetch(`/api/slug?data=${params.slug}`);
-    const data: { post: Post; categories: ICategory[] } = await response.json();
-    if (data) {
-      setPost(data.post);
-      setCategories(data.categories);
-    } else {
-      setError(true);
-    }
-    setLoading(false);
-  };
-
   useEffect(() => {
+    const fetchPost = async () => {
+      const response = await fetch(`/api/slug?data=${params.slug}`);
+      const data: { post: Post; categories: ICategory[] } =
+        await response.json();
+      if (data) {
+        setPost(data.post);
+        setCategories(data.categories);
+      } else {
+        setError(true);
+      }
+      setLoading(false);
+    };
+
     fetchPost();
   }, [params.slug]);
 
