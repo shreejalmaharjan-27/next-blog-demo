@@ -25,7 +25,7 @@ const Card = ({
   return (
     <Link
       href={slug}
-      className="block max-w-sm bg-white border border-gray-200 rounded-lg overflow-hidden shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+      className="block max-w-sm bg-white border border-gray-200 rounded-lg overflow-hidden shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 hover:scale-105 transition-all duration-300"
     >
       <img
         src={image}
