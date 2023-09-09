@@ -66,12 +66,12 @@ export default function Page() {
         <input
           type="text"
           placeholder="Search by title"
-          className="block w-full p-4 rounded-lg font-bold text-2xl shadow-sm bg-white"
+          className="block w-full p-4 rounded-lg font-bold text-2xl shadow-sm bg-white dark:bg-gray-800"
           onChange={(e) => setSearchTerm(e.target.value)}
         />
         <select
           onChange={(e) => setCategory(e.target.value)}
-          className="block w-full p-4 rounded-md shadow-sm bg-white"
+          className="block w-full p-4 rounded-md shadow-sm bg-white dark:bg-gray-950"
         >
           <option value="">All Categories</option>
           {categories.map((cat) => (
@@ -126,7 +126,7 @@ export default function Page() {
                 setItemsPerPage(Number(e.target.value));
                 SetCurrentPage(0);
               }}
-              className="block w-full p-4 rounded-md shadow-sm bg-white"
+              className="block w-full p-4 rounded-md shadow-sm bg-white dark:bg-gray-950"
             >
               <option value="5">5 per page</option>
               <option value="10">10 per page</option>
